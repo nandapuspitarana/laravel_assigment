@@ -11,7 +11,7 @@
 
     <div class="form-inline my-2 my-lg-0">
 
-      <a class="btn btn-primary my-sm-0" href="#">Tambah Data</a>
+      <a class="btn btn-primary my-sm-0" href="{{ route('movie.create') }}">Tambah Data</a>
     </div>
      
     <table class="table">

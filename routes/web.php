@@ -18,3 +18,4 @@ Route::get('/', function () {
 Route::get('/admin', 'MovieController@index');
 
 Route::get('/admin/create', ['uses' => 'MovieController@create', 'as' => 'movie.create']);
+Route::post('/admin/create', ['uses' => 'MovieController@store', 'as' => 'movie.store']);

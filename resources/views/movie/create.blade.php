@@ -1,10 +1,10 @@
 @extends('layouts.default')
 
-@section('title', 'Tambah Siswa')
+@section('title', 'Tambah Movie')
 
 @section('content')
 
-    <form class="container" enctype="multipart/form-data" method="POST" action="">
+    <form class="container" enctype="multipart/form-data" method="POST" action="{{ route('movie.store') }}">
     {{ csrf_field() }}
     <div class="form-group">
         <label>Title</label>
@@ -15,8 +15,9 @@
       <label>Category</label>
       <select name="categories_id" class="form-control">
         <option selected>Choose...</option>
-        <option>horor</option>
-        <option>drama</option>
+        @foreach($movieCategory as $categori)
+        <option value="{{ $categori->id }}">{{ $categori->category }}</option>
+        @endforeach
       </select>
     </div>
     
@@ -38,5 +39,18 @@
     
     <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+
+    <br/>
+    
+    @if($errors->any())
+        <div class="container alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            
+        </div>
+    @endif
 
 @stop
