@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/admin', 'MovieController@index');
+
+Route::get('/admin/create', ['uses' => 'MovieController@create', 'as' => 'movie.create']);

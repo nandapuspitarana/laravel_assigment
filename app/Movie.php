@@ -8,7 +8,7 @@ class Movie extends Model
 {
     protected $fillable = ['title', 'year', 'description', 'photo'];
 
-    public function studentClass()
+    public function movieCategories()
     {
         return $this->belongsTo(\App\MovieCategories::class, 'categories_id');
     }
