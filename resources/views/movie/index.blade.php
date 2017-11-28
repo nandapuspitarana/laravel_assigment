@@ -23,6 +23,7 @@
                 <th scope="col">Category</th>
                 <th scope="col">Year</th>
                 <th scope="col">Description</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -47,6 +48,9 @@
                     <td>{{ $movie->movieCategories->category }}</td>
                     <td>{{ $movie->year }}</td>
                     <td>{{ $movie->description }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="#">Update</a>
+                    </td>
                 </tr>
              @endforeach
         </tbody>

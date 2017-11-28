@@ -67,4 +67,11 @@ class MovieController extends Controller
         return "/photos/".$filename;
         
     }
+
+    public function edit($id)
+    {
+        $movie = $this->movie->find($id);
+
+        return view('movie.edit', compact('movie', 'movieCategory'));
+    }
 }
