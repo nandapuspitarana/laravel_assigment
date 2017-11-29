@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', 'Edit Siswa')
+@section('title', 'Edit Movie')
 
 @section('content')
 
@@ -9,18 +9,28 @@
     {{ csrf_field() }}
 
     <div class="form-group">
-        <label>Nama</label>
-        <input type="text" name="title" value="{{ $movie->title }}" class="form-control" placeholder="Masukan Nama">
+        <label>Title</label>
+        <input type="text" name="title" value="{{ $movie->title }}" class="form-control" placeholder="Judul film">
     </div>
 
     <div class="form-group">
-        <label>Alamat</label>
-        <input type="text" name="year" value="{{ $movie->year }}" class="form-control" placeholder="Masukan Alamat">
+      <label>Category</label>
+      <select name="categories_id" class="form-control">
+        <option>Choose...</option>
+        @foreach( $movieCategory as $categori )
+        <option value="{{ $categori->id }}">{{ $categori->category }}</option>
+        @endforeach
+      </select>
     </div>
 
     <div class="form-group">
-        <label>Umur</label>
-        <input type="text" name="description" value="{{ $movie->description }}" class="form-control" placeholder="Masukan Umur">
+        <label>Tahun Realese</label>
+        <input type="text" name="year" value="{{ $movie->year }}" class="form-control" placeholder="Tahun Pembuatan">
+    </div>
+
+    <div class="form-group">
+        <label>Descripsi film</label>
+        <input type="text" name="description" value="{{ $movie->description }}" class="form-control" placeholder="Deskripsi Film">
     </div>
 
     <div class="form-group">

@@ -70,8 +70,13 @@ class MovieController extends Controller
 
     public function edit($id)
     {
-        $movie = $this->movie->find($id);
+        $movie = $this->movie->with('movieCategories')->find($id);
 
-        return view('movie.edit', compact('movie', 'movieCategory'));
+        $movieCategory = $this->movieCategory->all();
+
+        // return $movieCategory;
+
+        return view('movie.edit', compact('movie','movieCategory'));
+
     }
 }
