@@ -22,8 +22,8 @@
             </li>
              
           </ul>
-          <form class="form-inline my-2 my-md-0">
-            <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+          <form method="GET" action="{{ route('movie.search') }}" class="form-inline my-2 my-md-0 mx-3">
+            <input name="keyword" class="form-control" type="text" placeholder="Search" aria-label="Search">
           </form>
         </div>
       </div>

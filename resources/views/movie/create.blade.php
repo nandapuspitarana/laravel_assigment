@@ -8,7 +8,10 @@
     {{ csrf_field() }}
     <div class="form-group">
         <label>Title</label>
-        <input type="text" name="title" class="form-control" placeholder="Judul Film">
+        <input type="text" name="title" class="form-control" placeholder="Title Movie">
+        @if($errors->first('title'))
+            <p style="color:red">{{ $errors->first('title') }}</p>
+        @endif
     </div>
 
     <div class="form-group">
@@ -16,19 +19,25 @@
       <select name="categories_id" class="form-control">
         <option selected>Choose...</option>
         @foreach($movieCategory as $categori)
-        <option value="{{ $categori->id }}">{{ $categori->category }}</option>
+        <option value="{{ $categori->id }}"> {{ $categori->category }} </option>
         @endforeach
       </select>
     </div>
     
     <div class="form-group">
-        <label>Tahun</label>
-        <input type="text" name="year" class="form-control" placeholder="Tahun Realese">
+        <label>Year</label>
+        <input type="text" name="year" class="form-control" placeholder="Movie Realese">
+        @if($errors->first('year'))
+            <p style="color:red">{{ $errors->first('year') }}</p>
+        @endif
     </div>
 
     <div class="form-group">
         <label>Description</label>
-        <input type="text" name="description" class="form-control" placeholder="Deskripsi Film">
+        <input type="text" name="description" class="form-control" placeholder="Sinopsis">
+        @if($errors->first('description'))
+            <p style="color:red">{{ $errors->first('description') }}</p>
+        @endif
     </div>
 
     <div class="form-group">
@@ -39,18 +48,4 @@
     
     <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-
-    <br/>
-    
-    @if($errors->any())
-        <div class="container alert alert-danger">
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-            
-        </div>
-    @endif
-
 @stop

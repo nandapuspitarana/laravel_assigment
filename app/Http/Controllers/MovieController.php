@@ -43,7 +43,6 @@ class MovieController extends Controller
 
     public function store(MovieRequest $request)
     {
-    	// monggo lanjutin udah solved
     	
         // dapetin data inputan kecuali photo
         $movie = $request->except("photo");
@@ -53,6 +52,7 @@ class MovieController extends Controller
         }
         $this->movie->create($movie);
 
+        session()->flash('success_message', 'Data tersimpan');
 
         return redirect('/admin');
     }
@@ -74,9 +74,67 @@ class MovieController extends Controller
 
         $movieCategory = $this->movieCategory->all();
 
-        // return $movieCategory;
-
         return view('movie.edit', compact('movie','movieCategory'));
 
     }
+
+    public function update($id, MovieRequest $request)
+    {
+        $movieForm = $request->except('photo');
+
+        if($request->hasFile('photo')) {
+            $movieForm['photo'] = $this->generatePhoto($request->file('photo'), $movieForm);
+        }
+
+        $movie = $this->movie->find($id);
+
+        if($movie) {
+            $movie->update($movieForm);
+        }
+
+        session()->flash('success_message', 'Data terupdate');
+
+        return redirect('/admin');
+    }
+
+    public function destroy($id)
+    {
+        $movie = $this->movie->find($id);
+
+        if($movie) {
+            $movie->delete();
+        }
+
+        session()->flash('success_message', 'Data terhapus');
+
+        return redirect()->back();
+    }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+
+        $movies = $this->movie->where('title', 'LIKE', "%$keyword%")
+            ->orderBy('id', 'ASC')->paginate(10);
+        $movies->appends(['keyword' => $keyword]);
+
+        return view('movie.search', compact('movies'));
+    }
+
+    //category
+    public function indexCategory()
+    {
+        $movieCategory = $this->movieCategory->orderBy('category')->paginate(10);
+
+        return view('movie.indexCategory', compact('movieCategory'));
+    }
+
+    public function createCategory()
+    {
+        $movieCategory = $this->movieCategory->all();
+
+        return view('movie.createCategory', compact('movieCategory'));
+    }
+
+    
 }

@@ -3,12 +3,6 @@
 @section('title', 'Movie1')
 
 @section('content')
-
-    @if(Session::get('success_message'))
-        <div class="alert alert-block alert-info col-12 w-100">
-            {{ Session::get('success_message') }}
-        </div>
-    @endif 
      
     <h1>Data Movie</h1>
 
@@ -52,7 +46,7 @@
                     <td>{{ $movie->year }}</td>
                     <td>{{ $movie->description }}</td>
                     <td>
-                        <a class="w-100 btn btn-primary" href="{{ route('movie.edit', $movie->id) }}">Update</a>
+                        <a class="btn btn-primary" href="{{ route('movie.edit', $movie->id) }}">Update</a>
                         <form method="POST" action="{{ route('movie.destroy', $movie->id) }}">
                             <input type="hidden" name="_method" value="delete" />
                             {{ csrf_field() }}

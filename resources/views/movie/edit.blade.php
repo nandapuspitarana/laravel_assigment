@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <form class="container" enctype="multipart/form-data" method="POST">
+    <form class="container" enctype="multipart/form-data" method="POST" action="{{ route('movie.update', $movie->id) }}">
     <input type="hidden" name="_method" value="put" />
     {{ csrf_field() }}
 
@@ -18,7 +18,11 @@
       <select name="categories_id" class="form-control">
         <option>Choose...</option>
         @foreach( $movieCategory as $categori )
-        <option value="{{ $categori->id }}">{{ $categori->category }}</option>
+            @if( $categori->id == $movie->categories_id )
+                <option value="{{ $categori->id }}" selected>{{ $categori->category }}</option> 
+            @else
+                <option value="{{ $categori->id }}" >{{ $categori->category }}</option>
+            @endif
         @endforeach
       </select>
     </div>
